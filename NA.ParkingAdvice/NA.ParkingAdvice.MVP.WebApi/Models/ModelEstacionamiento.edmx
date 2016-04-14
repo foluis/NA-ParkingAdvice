@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EstacionamientoDFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="tinyint" />
+          <Property Name="EstadoEstacionamientoId" Type="tinyint" />
+          <Property Name="ZonaEstablecimientoId" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadoEstacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoricoEstacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstacionamientoId" Type="tinyint" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZonaEstablecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Logitud" Type="decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="CantidadEstacionamientos" Type="int" Nullable="false" />
+          <Property Name="CantidadEstacionamientosUsados" Type="int" Nullable="false" />
+          <Property Name="EstablecimientoId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Estacionamiento_EstadoEstacionamiento">
+          <End Role="EstadoEstacionamiento" Type="Self.EstadoEstacionamiento" Multiplicity="0..1" />
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEstacionamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="EstadoEstacionamientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacionamiento_ZonaEstablecimiento">
+          <End Role="ZonaEstablecimiento" Type="Self.ZonaEstablecimiento" Multiplicity="0..1" />
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZonaEstablecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="ZonaEstablecimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoricoEstacionamiento_Estacionamiento">
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="1" />
+          <End Role="HistoricoEstacionamiento" Type="Self.HistoricoEstacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoricoEstacionamiento">
+              <PropertyRef Name="EstacionamientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoricoEstacionamiento_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistoricoEstacionamiento" Type="Self.HistoricoEstacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoricoEstacionamiento">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZonaEstablecimiento_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="ZonaEstablecimiento" Type="Self.ZonaEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZonaEstablecimiento">
+              <PropertyRef Name="EstablecimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstacionamientoDFModelStoreContainer">
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estacionamiento" EntityType="Self.Estacionamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoEstacionamiento" EntityType="Self.EstadoEstacionamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoricoEstacionamiento" EntityType="Self.HistoricoEstacionamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZonaEstablecimiento" EntityType="Self.ZonaEstablecimiento" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Estacionamiento_EstadoEstacionamiento" Association="Self.FK_Estacionamiento_EstadoEstacionamiento">
+            <End Role="EstadoEstacionamiento" EntitySet="EstadoEstacionamiento" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacionamiento_ZonaEstablecimiento" Association="Self.FK_Estacionamiento_ZonaEstablecimiento">
+            <End Role="ZonaEstablecimiento" EntitySet="ZonaEstablecimiento" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoricoEstacionamiento_Estacionamiento" Association="Self.FK_HistoricoEstacionamiento_Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="HistoricoEstacionamiento" EntitySet="HistoricoEstacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoricoEstacionamiento_Usuario" Association="Self.FK_HistoricoEstacionamiento_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistoricoEstacionamiento" EntitySet="HistoricoEstacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZonaEstablecimiento_Establecimiento" Association="Self.FK_ZonaEstablecimiento_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="ZonaEstablecimiento" EntitySet="ZonaEstablecimiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstacionamientoDFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Longitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <NavigationProperty Name="ZonaEstablecimiento" Relationship="Self.FK_ZonaEstablecimiento_Establecimiento" FromRole="Establecimiento" ToRole="ZonaEstablecimiento" />
+        </EntityType>
+        <EntityType Name="Estacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Byte" />
+          <Property Name="EstadoEstacionamientoId" Type="Byte" />
+          <Property Name="ZonaEstablecimientoId" Type="Int32" />
+          <NavigationProperty Name="EstadoEstacionamiento" Relationship="Self.FK_Estacionamiento_EstadoEstacionamiento" FromRole="Estacionamiento" ToRole="EstadoEstacionamiento" />
+          <NavigationProperty Name="ZonaEstablecimiento" Relationship="Self.FK_Estacionamiento_ZonaEstablecimiento" FromRole="Estacionamiento" ToRole="ZonaEstablecimiento" />
+          <NavigationProperty Name="HistoricoEstacionamiento" Relationship="Self.FK_HistoricoEstacionamiento_Estacionamiento" FromRole="Estacionamiento" ToRole="HistoricoEstacionamiento" />
+        </EntityType>
+        <EntityType Name="EstadoEstacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="Self.FK_Estacionamiento_EstadoEstacionamiento" FromRole="EstadoEstacionamiento" ToRole="Estacionamiento" />
+        </EntityType>
+        <EntityType Name="HistoricoEstacionamiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstacionamientoId" Type="Byte" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Estacionamiento" Relationship="Self.FK_HistoricoEstacionamiento_Estacionamiento" FromRole="HistoricoEstacionamiento" ToRole="Estacionamiento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_HistoricoEstacionamiento_Usuario" FromRole="HistoricoEstacionamiento" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HistoricoEstacionamiento" Relationship="Self.FK_HistoricoEstacionamiento_Usuario" FromRole="Usuario" ToRole="HistoricoEstacionamiento" />
+        </EntityType>
+        <EntityType Name="ZonaEstablecimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="Logitud" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
+          <Property Name="CantidadEstacionamientos" Type="Int32" Nullable="false" />
+          <Property Name="CantidadEstacionamientosUsados" Type="Int32" Nullable="false" />
+          <Property Name="EstablecimientoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_ZonaEstablecimiento_Establecimiento" FromRole="ZonaEstablecimiento" ToRole="Establecimiento" />
+          <NavigationProperty Name="Estacionamiento" Relationship="Self.FK_Estacionamiento_ZonaEstablecimiento" FromRole="ZonaEstablecimiento" ToRole="Estacionamiento" />
+        </EntityType>
+        <Association Name="FK_ZonaEstablecimiento_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
+          <End Role="ZonaEstablecimiento" Type="Self.ZonaEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZonaEstablecimiento">
+              <PropertyRef Name="EstablecimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacionamiento_EstadoEstacionamiento">
+          <End Role="EstadoEstacionamiento" Type="Self.EstadoEstacionamiento" Multiplicity="0..1" />
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEstacionamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="EstadoEstacionamientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacionamiento_ZonaEstablecimiento">
+          <End Role="ZonaEstablecimiento" Type="Self.ZonaEstablecimiento" Multiplicity="0..1" />
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZonaEstablecimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="ZonaEstablecimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoricoEstacionamiento_Estacionamiento">
+          <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="1" />
+          <End Role="HistoricoEstacionamiento" Type="Self.HistoricoEstacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoricoEstacionamiento">
+              <PropertyRef Name="EstacionamientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoricoEstacionamiento_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistoricoEstacionamiento" Type="Self.HistoricoEstacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoricoEstacionamiento">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstacionamientoDFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" />
+          <EntitySet Name="Estacionamiento" EntityType="Self.Estacionamiento" />
+          <EntitySet Name="EstadoEstacionamiento" EntityType="Self.EstadoEstacionamiento" />
+          <EntitySet Name="HistoricoEstacionamiento" EntityType="Self.HistoricoEstacionamiento" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="ZonaEstablecimiento" EntityType="Self.ZonaEstablecimiento" />
+          <AssociationSet Name="FK_ZonaEstablecimiento_Establecimiento" Association="Self.FK_ZonaEstablecimiento_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="ZonaEstablecimiento" EntitySet="ZonaEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacionamiento_EstadoEstacionamiento" Association="Self.FK_Estacionamiento_EstadoEstacionamiento">
+            <End Role="EstadoEstacionamiento" EntitySet="EstadoEstacionamiento" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacionamiento_ZonaEstablecimiento" Association="Self.FK_Estacionamiento_ZonaEstablecimiento">
+            <End Role="ZonaEstablecimiento" EntitySet="ZonaEstablecimiento" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoricoEstacionamiento_Estacionamiento" Association="Self.FK_HistoricoEstacionamiento_Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="HistoricoEstacionamiento" EntitySet="HistoricoEstacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoricoEstacionamiento_Usuario" Association="Self.FK_HistoricoEstacionamiento_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistoricoEstacionamiento" EntitySet="HistoricoEstacionamiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EstacionamientoDFModelStoreContainer" CdmEntityContainer="EstacionamientoDFEntities">
+          <EntitySetMapping Name="Establecimiento">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.Establecimiento">
+              <MappingFragment StoreEntitySet="Establecimiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estacionamiento">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.Estacionamiento">
+              <MappingFragment StoreEntitySet="Estacionamiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="EstadoEstacionamientoId" ColumnName="EstadoEstacionamientoId" />
+                <ScalarProperty Name="ZonaEstablecimientoId" ColumnName="ZonaEstablecimientoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoEstacionamiento">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.EstadoEstacionamiento">
+              <MappingFragment StoreEntitySet="EstadoEstacionamiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoricoEstacionamiento">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.HistoricoEstacionamiento">
+              <MappingFragment StoreEntitySet="HistoricoEstacionamiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EstacionamientoId" ColumnName="EstacionamientoId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZonaEstablecimiento">
+            <EntityTypeMapping TypeName="EstacionamientoDFModel.ZonaEstablecimiento">
+              <MappingFragment StoreEntitySet="ZonaEstablecimiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Logitud" ColumnName="Logitud" />
+                <ScalarProperty Name="CantidadEstacionamientos" ColumnName="CantidadEstacionamientos" />
+                <ScalarProperty Name="CantidadEstacionamientosUsados" ColumnName="CantidadEstacionamientosUsados" />
+                <ScalarProperty Name="EstablecimientoId" ColumnName="EstablecimientoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
