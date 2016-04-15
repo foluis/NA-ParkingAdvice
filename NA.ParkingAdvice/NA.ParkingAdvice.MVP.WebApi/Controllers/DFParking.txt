@@ -1,0 +1,9 @@
+﻿
+
+PUT
+http://localhost:56292/api/DFParking/2
+Accept: application/json
+Content-Type: Application/Json
+
+
+{"Establecimiento":[],"Estacionamiento":[],"Id":2,"Nombre":"Nada","Latitud":25.653835,"Logitud":-100.381861,"CantidadEstacionamientos":20,"CantidadEstacionamientosUsados":0}
