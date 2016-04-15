@@ -5,6 +5,28 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NA.ParkingAdvice.MVP.WebApi", "NA.ParkingAdvice.MVP.WebApi\NA.ParkingAdvice.MVP.WebApi.csproj", "{D39FC19D-B1C7-4804-894F-82226F6FA950}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "NA.ParkingAdvice.MVP.Front", "NA.ParkingAdvice.MVP.Front\", "{235071C6-AE47-4592-87CB-06DB2B3FE30C}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_9418"
+		Debug.AspNetCompiler.PhysicalPath = "NA.ParkingAdvice.MVP.Front\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_9418\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_9418"
+		Release.AspNetCompiler.PhysicalPath = "NA.ParkingAdvice.MVP.Front\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_9418\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "9418"
+		SlnRelativePath = "NA.ParkingAdvice.MVP.Front\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +37,10 @@ Global
 		{D39FC19D-B1C7-4804-894F-82226F6FA950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39FC19D-B1C7-4804-894F-82226F6FA950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D39FC19D-B1C7-4804-894F-82226F6FA950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235071C6-AE47-4592-87CB-06DB2B3FE30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235071C6-AE47-4592-87CB-06DB2B3FE30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235071C6-AE47-4592-87CB-06DB2B3FE30C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{235071C6-AE47-4592-87CB-06DB2B3FE30C}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
