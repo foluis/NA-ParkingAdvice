@@ -10,7 +10,7 @@ myApp.config(function ($routeProvider) {
         })
          .when("/admin", {
              templateUrl: "components/mvp/admin/admin.html",
-             controller: "counterController"
+             controller: "counterController" 
          })
         .otherwise({
             redirectTo: "/public"
