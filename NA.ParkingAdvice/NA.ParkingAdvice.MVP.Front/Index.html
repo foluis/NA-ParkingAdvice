@@ -7,12 +7,20 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Parcking planer</title>
 
-    <!-- AngularJS -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="components/mvp/mvpController.js"></script>
-    <!--<script src="Scripts/angular.js"></script>-->
     <!-- Bootstrap -->
     <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <!-- css -->
+    <link href="css/app.css" rel="stylesheet" />
+
+    <!-- AngularJS -->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+
+    <!-- Main module -->
+    <!--<script src="components/mvp/mvpController.js"></script>-->
+    <script src="Scripts/App/app.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,44 +30,43 @@
     <![endif]-->
 </head>
 <body>
-    <div ng-controller="mvpController">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <div class="page-header">
-                        <h1 class="text-center">Definity First</h1>
-                    </div>
-                    <p>
-                        <label for="sel1">Zonas:</label>
-                        <select class="form-control" id="sel1" ng-model="zonaSeleccionada" ng-options="zona.name for zona in zonas"></select>
-                    </p>
-                    <h2>{{zonaSeleccionada.name}}</h2>
-                    
+    <!--<div class="container" ng-controller="counterController">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="page-header">
+                    <h1 class="logo text-center">{{establecimiento}}</h1>
                 </div>
-                <div class="col-sm-4"></div>
+                <p>
+                    <label for="sel1">Zonas:</label>
+                    <select class="form-control" id="sel1" ng-model="zonaSeleccionada" ng-options="zona.name for zona in zonas"></select>
+                </p>
+                <h2>{{zonaSeleccionada.name}}</h2>
             </div>
-            <div class="row">
-                <div class="col-sm-4"></div>                
-                <div class="col-sm-4">
-                    <h3>Usados: {{ zonaSeleccionada.ocupacion }} Total: {{ zonaSeleccionada.cupoTotal }}</h3>                    
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <div class="text-center">
-                        <p>
-                            <button ng-click="ocupar(zonaSeleccionada.id,true)" class="btn btn-info btn-block" id="ocupar" type="button">Ocupar</button>
-                            <button ng-click="ocupar(zonaSeleccionada.id,false)" class="btn btn-info btn-block" id="desocupar" type="button">Desocupar</button>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
+            <div class="col-sm-4"></div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <h3>Usados: {{ zonaSeleccionada.ocupacion }} Total: {{ zonaSeleccionada.cupoTotal }}</h3>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="text-center">
+                    <p>
+                        <button ng-click="ocupar(zonaSeleccionada.id,true)" class="btn btn-info btn-block" id="ocupar" type="button">Ocupar</button>
+                        <button ng-click="ocupar(zonaSeleccionada.id,false)" class="btn btn-info btn-block" id="desocupar" type="button">Desocupar</button>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>-->
+    <div ng-view></div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
