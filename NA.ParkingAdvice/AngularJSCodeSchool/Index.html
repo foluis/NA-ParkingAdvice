@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="gemStore">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link href="app/css/app.css" rel="stylesheet" />
+
+</head>
+<body class="container" ng-controller="StoreController as store">
+
+    <!--<div class="product row" ng-hide="product.soldOut" ng-repeat="product in store.products">
+        <h3>
+            {{product.name}}
+            <em class="pull-right">${{product.price}}</em>
+            <button ng-show="product.canPurchase">Add to cart</button>
+        </h3>
+    </div>-->
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="product in store.products">
+            
+            <h3>
+                <product-tite></product-tite>
+            </h3>
+            <!-- Image Gallery  -->
+            <!--<div class='gallery' ng-show="product.images.length" ng-controller="GalleryController as gallery ">
+                <img ng-src="{{product.images[gallery.current]}}" />
+                <ul class="list-inline thumbs">
+                    <li class="thumbnail" ng-repeat="image in product.images">
+                        <img ng-src="{{image}}" />hola
+                    </li>
+                </ul>
+            </div>-->
+
+            <div class="gallery">
+                <div class="img-wrap">
+                    <img ng-src="{{product.images[0]}}" />
+                </div>
+                <!--<ul class="img-thumbnails clearfix">
+
+                    <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+                        <img ng-src="{{image}}" />
+                    </li>
+                </ul>-->        
+            </div>
+
+            <product-panels></product-panels>
+           
+
+
+        </li>
+    </ul>
+
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

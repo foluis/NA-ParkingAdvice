@@ -15,10 +15,20 @@ namespace NA.ParkingAdvice.MVP.WebApi.Controllers
     {
         private EstacionamientoDFEntities db = new EstacionamientoDFEntities();
 
+        [ResponseType(typeof(ZonaEstablecimiento))]
         public IHttpActionResult Get()
         {
             try
             {
+                //var zonaEstablecimiento1 = db.ZonaEstablecimiento.ToList().Select(r => new
+                //{
+                //    Nombre = r.Nombre,
+                //    Latitud = r.Latitud,
+                //    Logitud = r.Logitud,
+                //    CantidadEstacionamientos = r.CantidadEstacionamientos,
+                //    CantidadEstacionamientosUsados = r.CantidadEstacionamientosUsados
+                //});
+
                 var zonaEstablecimiento = db.ZonaEstablecimiento.Select(r => new
                 {
                     Nombre = r.Nombre,

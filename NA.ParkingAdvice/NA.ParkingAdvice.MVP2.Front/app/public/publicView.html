@@ -1,0 +1,23 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="page-header">
+                <h1 class="logo text-center">aqui {{establecimiento}}</h1>
+            </div>
+            <p>
+                <label for="sel1">Zonas:</label>
+                <select class="form-control" id="sel1" ng-model="zonaSeleccionada" ng-options="zona.name for zona in zonas"></select>
+            </p>
+            <h2>{{zonaSeleccionada.name}}</h2>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <h3>Usados: {{ zonaSeleccionada.ocupacion }} Total: {{ zonaSeleccionada.cupoTotal }}</h3>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
