@@ -1,11 +1,12 @@
-﻿(function () {
+﻿/// <reference path="templates/admin/index.html" />
+(function () {
     var app = angular.module('app', ['ngRoute'])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider                
                 .when('/admin',
-                    { templateUrl: 'app/admin/index.html' })
+                    { templateUrl: 'app/templates/admin/index.html' })
                 .when('/public',
-                    { templateUrl: 'app/public/index.html' })
+                    { templateUrl: 'app/templates/public/index.html' })
                 .otherwise(
                     { redirectTo: 'app/public/index.html' });
         }]);
